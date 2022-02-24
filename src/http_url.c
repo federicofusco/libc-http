@@ -14,7 +14,7 @@ http_url* create_http_url ( char* url_addr ) {
 
 	// Creates and parses the URL
 	http_url* url = calloc ( 1, sizeof ( http_url ) + strlen ( url_addr ) + 1 );
-	url = parse_url ( url, url_addr );
+	url = parse_http_url ( url, url_addr );
 
 	return url;
 }

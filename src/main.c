@@ -1,12 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "http_url.h"
+#include "http.h"
 
 int main ( int argc, char* argv[] ) {
 
-	http_url* url = create_url ( argv[1] );
-	destroy_url ( url );
+	send_http_request ( argv[1] );
 
 	exit ( EXIT_SUCCESS );
 
