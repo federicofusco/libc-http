@@ -16,7 +16,7 @@ CC = gcc
 CFLAGS = -Wextra -Wall -Wshadow -g
 
 # define any directories containing header files other than /usr/include
-INCLUDES = -Isrc/headers
+INCLUDES = -I src/headers
 
 # define the C source files
 SRCS = src/http_request.c src/http_response.c src/http_socket.c src/http_url.c src/http.c src/main.c
@@ -45,9 +45,6 @@ VALCMD = ./libc-http http://www.neverssl.com/?query=1
 #
 
 .PHONY: depend clean
-
-all: $(MAIN)
-	@echo  Compiled $(MAIN)!
 
 $(MAIN): $(SRCS) 
 	$(CC) $(CFLAGS) $(INCLUDES) $(SRCS) -o $(MAIN) 

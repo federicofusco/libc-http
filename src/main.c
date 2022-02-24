@@ -2,7 +2,6 @@
 #include <stdlib.h>
 
 #include "http.h"
-#include "http_response.h"
 
 int main ( int argc, char* argv[] ) {
 
@@ -13,8 +12,8 @@ int main ( int argc, char* argv[] ) {
 	}
 
 	http_response* response = send_http_request ( argv[1] );
-
 	destroy_http_response ( response );
+
 	exit ( EXIT_SUCCESS );
 
 }
