@@ -48,8 +48,6 @@ http_response* send_http_request ( char* url_addr ) {
 	destroy_http_url ( url );
 	destroy_http_request ( request );
 
-	printf ( "%s\n", response -> response );
-
 	return response;
 
 }
