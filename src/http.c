@@ -14,7 +14,7 @@
  * @param url_addr - The URL where the request should be sent
  * @returns A parsed response structure
  */ 
-http_response send_http_request ( char* url_addr ) {
+http_response* send_http_request ( char* url_addr ) {
 
 	// Creates a new URL
 	http_url* url = create_http_url ( url_addr );
@@ -42,10 +42,13 @@ http_response send_http_request ( char* url_addr ) {
 		exit ( EXIT_FAILURE );
 	}
 
-	http_response response = http_await_response_data ( socket_data, request );
+	http_response* response = http_await_response_data ( socket_data, request );
 
 	// Frees memory
 	destroy_http_url ( url );
+	destroy_http_request ( request );
+
+	printf ( "%s\n", response -> response );
 
 	return response;
 

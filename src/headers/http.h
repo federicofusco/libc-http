@@ -7,6 +7,6 @@
 
 #include "http_response.h"
 
-http_response send_http_request ( char* url );
+http_response* send_http_request ( char* url );
 
 #endif

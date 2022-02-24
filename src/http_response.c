@@ -88,7 +88,6 @@ int destroy_http_response ( http_response* response ) {
 	// Frees the response struct
 	free ( response -> response );
 	free ( response );
-
 	return 1;
 }
 
@@ -100,7 +99,7 @@ int destroy_http_response ( http_response* response ) {
  * @param request    - The request structure
  * @returns A new structure containing a response
  */
-http_response http_await_response_data ( int descriptor, http_request* request ) {
+http_response* http_await_response_data ( int descriptor, http_request* request ) {
 
 	// Creates a new empty HTTP response
 	http_response* response = create_http_response ( DEFAULT_RESPONSE_SIZE );
@@ -113,7 +112,7 @@ http_response http_await_response_data ( int descriptor, http_request* request )
 		}
 	}
 
-	return *response;
+	return response;
 }
 
 /**
@@ -143,7 +142,7 @@ void http_cut_trailing_crlf ( http_request* request ) {
 char* parse_http_content ( http_request* request, char* body, char* body_end ) {
 	
 	// Gets the body length
-	size_t len = body_end - body;
+	int len = body_end - body;
 
 	// Checks if the message is chunked
 	if ( request -> state -> chunk > -1 ) {

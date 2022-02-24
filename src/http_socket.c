@@ -36,7 +36,8 @@ int create_http_connection ( http_url* url ) {
 
 	// Loops through all the address results, until a successfull
 	// connection is established
-	for ( pointer = si; pointer; pointer -> ai_next ) {
+	pointer = si;
+	while ( pointer ) {
 
 		// Attempts to create a connection descriptor
 		socket_descriptor = socket ( pointer -> ai_family, pointer -> ai_socktype, pointer -> ai_protocol );
@@ -80,7 +81,7 @@ int http_send ( int descriptor, char* data ) {
 	
 	// Gets the request size
 	size_t len = strlen ( data );
-	for ( len; len > 0; ) {
+	while ( len > 0 ) {
 		
 		// Sends the request to the socket
 		int bytes = send ( descriptor, data, len, 0 );

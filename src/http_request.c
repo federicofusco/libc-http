@@ -28,6 +28,8 @@ http_request* create_http_request () {
 int destroy_http_request ( http_request* request ) {
 
 	// Frees the request
+	free ( request -> state );
+	free ( request -> header );
 	free ( request );
 	return 1;
 }

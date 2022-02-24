@@ -1,2 +1,3 @@
 src/prototypes
-src/http
+src/libc-http
+libc-http

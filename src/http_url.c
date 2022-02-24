@@ -31,10 +31,6 @@ http_url* parse_http_url ( http_url* url, char* url_addr ) {
 	size_t url_length = strlen ( url_addr );
 	char* url_buffer;
 	char* url_pointer;
-	char* original_buffer;
-
-	// // Creates an empty URL
-	// http_url* url = calloc ( 1, sizeof ( http_url ) + url_length + 1 );
 
 	// Copies the URL to the url buffer
 	url_buffer = (char*) url + sizeof ( http_url );
@@ -45,7 +41,6 @@ http_url* parse_http_url ( http_url* url, char* url_addr ) {
 		exit ( EXIT_FAILURE );
 	}
 	memcpy ( url_buffer, url_addr, url_length );
-	original_buffer = url_buffer;
 
 	// Gets the URL scheme
 	// Note the only currently supported scheme is HTTP, HTTPS coming soon
@@ -78,6 +73,10 @@ http_url* parse_http_url ( http_url* url, char* url_addr ) {
 		*( url_pointer ) = 0;
 		url -> userinfo = url_buffer;
 		url_buffer = url_pointer + 1;
+	} else {
+
+		// Gets the userinfo to an empty value
+		url -> userinfo = "";
 	}
 
 	// Gets the URL host, path, query and fragments
@@ -119,6 +118,7 @@ http_url* parse_http_url ( http_url* url, char* url_addr ) {
 		} else {
 
 			// Checks if a fragment is present
+			url -> query = "";
 			url_pointer = strchr ( url_buffer, '#' );
 			if ( url_pointer ) {
 
@@ -134,6 +134,7 @@ http_url* parse_http_url ( http_url* url, char* url_addr ) {
 
 				// No fragment is present
 				url -> path = url_buffer;
+				url -> fragment = "";
 			}
 
 		}
@@ -141,6 +142,9 @@ http_url* parse_http_url ( http_url* url, char* url_addr ) {
 
 		// There is no path, query or fragment
 		url -> host = url_buffer;
+		url -> path = "";
+		url -> query = "";
+		url -> fragment = "";
 	}
 
 	return url;

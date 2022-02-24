@@ -2,11 +2,19 @@
 #include <stdlib.h>
 
 #include "http.h"
+#include "http_response.h"
 
 int main ( int argc, char* argv[] ) {
 
-	send_http_request ( argv[1] );
+	if ( argc < 2 ) {
 
+		printf ( "Error: No URL was given!\n" );
+		exit ( EXIT_FAILURE );
+	}
+
+	http_response* response = send_http_request ( argv[1] );
+
+	destroy_http_response ( response );
 	exit ( EXIT_SUCCESS );
 
 }
