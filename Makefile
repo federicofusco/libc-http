@@ -6,37 +6,37 @@
 # #
 
 # The current working directory
-PWD = $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
+PWD := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 
 
 # Define the C compiler to use
-CC = gcc
+CC := gcc
 
 # define any compile-time flags
-CFLAGS = -Wextra -Wall -Wshadow -g
+CFLAGS := -Wextra -Wall -Wshadow -g
 
 # define any directories containing header files other than /usr/include
-INCLUDES = -I src/headers
+INCLUDES := -I src/headers
 
 # define the C source files
-SRCS = src/http_request.c src/http_response.c src/http_socket.c src/http_url.c src/http.c src/main.c
+SRCS := $(shell find $(PWD) -name '*.c')
 
 # define the C object files 
 #
 # This uses Suffix Replacement within a macro:
-#   $(name:string1=string2)
+#   $(name:string1:=string2)
 #         For each word in 'name' replace 'string1' with 'string2'
 # Below we are replacing the suffix .c of all words in the macro SRCS
 # with the .o suffix
 #
-# OBJS = $(SRCS:.c=.o)
+# OBJS := $(SRCS:.c:=.o)
 
 # define the executable file 
-MAIN = libc-http
+MAIN := libc-http
 
 # Defines the values for valgrind
-VALFLAGS = --leak-check=full -s
-VALCMD = ./libc-http http://www.neverssl.com/?query=1
+VALFLAGS := --leak-check:=full -s
+VALCMD := ./libc-http http://www.neverssl.com/?query:=1
 
 #
 # The following part of the makefile is generic; it can be used to 

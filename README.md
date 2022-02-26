@@ -8,7 +8,6 @@ A HTTP library I wrote in C. This does not currently support HTTPS, or any metho
 ## Todo
 
  - Add support for other methods (e.i POST, DELETE, etc)
- - Enable HTTPS support
  - Support redirection
 
 ## Usage/Examples
